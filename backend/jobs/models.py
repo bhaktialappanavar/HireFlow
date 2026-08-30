@@ -1,5 +1,5 @@
 from django.db import models
-from accounts.models import Company, RecruiterProfile
+from accounts.models import Company, RecruiterProfile, CandidateProfile
 
 class Job(models.Model):
     class JobType(models.TextChoices):
@@ -83,5 +83,53 @@ class Job(models.Model):
     def __str__(self):
         return self.title
 
+class Application(models.Model):
+    class status(models.TextChoices):
+        APPLIED = "APPLIED", "Applied"
+        UNDER_REVIEW = "UNDER_REVIEW","Under Review"
+        SHORTLISTED = "SHORTLISTED","Shortlisted"
+        INTERVIEW = "INTERVIEW","Interview"
+        SELECTED = "SELECTED","Selected"
+        REJECTED = "REJECTED","Rejected"
 
+    candidate = models.ForeignKey(
+        CandidateProfile,
+        on_delete = models.CASCADE,
+        related_name = "applications"
+    )
+
+    job = models.ForeignKey(
+        Job,
+        on_delete=models.CASCADE,
+        related_name="applications"
+    )
+
+    cover_letter = models.TextField(
+        blank = True
+    )
+
+    status = models.CharField(
+        max_length=20,
+        choices=status.choices,
+        default=status.APPLIED
+    )
+
+    applied_at = models.DateTimeField(
+        auto_now_add=True
+    )
+
+    updated_at = models.DateTimeField(
+        auto_now=True
+    )
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(
+                fields =["candidate","job"],
+                name="unique_candidate_job_application"
+            )
+        ]
+
+    def __str__(self):
+        return f"{self.candidate} - {self.job}"
 
