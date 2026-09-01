@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from accounts.models import User, CandidateProfile, RecruiterProfile
+from accounts.models import User, CandidateProfile, RecruiterProfile, Company
 
 class RegisterSerializer(serializers.ModelSerializer):
     password = serializers.CharField(write_only=True)
@@ -30,3 +30,52 @@ class RegisterSerializer(serializers.ModelSerializer):
             pass
 
         return user
+
+class CandidateProfileSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = CandidateProfile
+        fields = [
+            "phone",
+            "location",
+            "bio",
+            "education",
+            "experience",
+            "created_at",
+            "updated_at",
+        ]
+
+class RecruiterProfileSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = RecruiterProfile
+        fields = [
+            "company",
+            "phone",
+            "designation",
+            "created_at",
+            "updated_at",
+        ]
+        read_only_fields = [
+            "created_at",
+            "updated_at",
+        ]
+
+class CompanySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Company
+        fields = [
+            "id",
+            "name",
+            "description",
+            "website",
+            "location",
+            "industry",
+            "logo",
+            "created_at",
+            "updated_at",
+        ]
+
+        read_only_fields = [
+            "id",
+            "created_at",
+            "updated_at",
+        ]

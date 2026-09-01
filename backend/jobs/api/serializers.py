@@ -66,12 +66,26 @@ class ApplicationSerializer(serializers.ModelSerializer):
                 None
             )
 
-            if candidate and Application.objects.filter(
-                candidate=candidate,
-                job=data["job"]
-            ).exists():
-                raise serializers.ValidationError({
-                    "job":"You have already applied for this job."
-                })
+            if candidate:
+                job = data["job"]
+
+                if job.status == Job.Status.CLOSED:
+                    raise serializers.ValidationError({
+                        "job":"This job is closed and no longer accepting applications."
+                    })
+
+                if Application.objects.filter(
+                    candidate = candidate,
+                    job=job
+                ).exists():
+                    raise serializers.ValidationError({
+                        "job": "You have already applied for this job"
+                    })
 
         return data
+
+class ApplicationStatusSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Application
+        fields = ["status"]

@@ -3,8 +3,11 @@ from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from .permissions import IsCandidate
-from .serializers import RegisterSerializer
+from .permissions import IsCandidate, IsRecruiter
+from .serializers import(RegisterSerializer,CandidateProfileSerializer,
+RecruiterProfileSerializer,
+CompanySerializer,
+)
 
 class RegisterView(generics.CreateAPIView):
     serializer_class = RegisterSerializer
@@ -30,3 +33,35 @@ class CandidateOnlyView(APIView):
             "user" : request.user.username,
             "role": request.user.role,
         })
+
+class CandidateProfileView(generics.RetrieveUpdateAPIView):
+    serializer_class = CandidateProfileSerializer
+
+    permission_classes = [
+        IsAuthenticated,
+    ]
+
+    def get_object(self):
+        return self.request.user.candidate_profile
+
+class RecruiterProfileView(generics.RetrieveUpdateAPIView):
+    serializer_class = RecruiterProfileSerializer
+
+    permission_classes = [
+        IsAuthenticated,
+        IsRecruiter,
+    ]
+
+    def get_object(self):
+        return self.request.user.recruiter_profile
+
+class CompanyProfileView(generics.RetrieveUpdateAPIView):
+    serializer_class = CompanySerializer
+
+    permission_classes = [
+        IsAuthenticated,
+        IsRecruiter,
+    ]
+
+    def get_object(self):
+        return self.request.user.recruiter_profile.company
