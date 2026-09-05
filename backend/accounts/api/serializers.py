@@ -27,7 +27,13 @@ class RegisterSerializer(serializers.ModelSerializer):
             CandidateProfile.objects.create(user=user)
 
         elif user.role == User.Role.RECRUITER:
-            pass
+            company = Company.objects.create(
+                name=f"{user.username}'s Company"
+            )
+            RecruiterProfile.objects.create(
+                user=user,
+                company=company
+            )
 
         return user
 
