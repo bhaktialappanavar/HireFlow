@@ -8,7 +8,12 @@ api.interceptors.request.use(
   (config) => {
     const token = localStorage.getItem("access_token");
 
-    if (token) {
+    const publicEndpoints = [
+      "/auth/login/",
+      "/auth/register/",
+    ];
+
+    if (token && !publicEndpoints.includes(config.url)) {
       config.headers.Authorization = `Bearer ${token}`;
     }
 
