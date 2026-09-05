@@ -51,13 +51,17 @@ function Navbar() {
 
           {token && user?.role === "CANDIDATE" && (
             <>
-              <Link to="/candidate-dashboard">
-                Dashboard
-              </Link>
+            <Link to="/candidate-dashboard">
+              Dashboard
+            </Link>
 
-              <Link to="/my-applications">
-                My Applications
-              </Link>
+            <Link to="/my-applications">
+              My Applications
+            </Link>
+
+            <Link to="/candidate-profile">
+              Profile
+            </Link>
             </>
           )}
 

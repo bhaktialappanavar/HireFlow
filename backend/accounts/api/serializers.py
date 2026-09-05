@@ -40,24 +40,52 @@ class CandidateProfileSerializer(serializers.ModelSerializer):
             "bio",
             "education",
             "experience",
+            "profile_photo",
+            "resume",
             "created_at",
             "updated_at",
         ]
 
+
 class RecruiterProfileSerializer(serializers.ModelSerializer):
+    recruiter_name = serializers.CharField(
+        source="user.get_full_name",
+        read_only=True
+    )
+
+    recruiter_email = serializers.EmailField(
+        source="user.email",
+        read_only=True
+    )
+
+    company_name = serializers.CharField(
+        source="company.name",
+        read_only=True
+    )
+
     class Meta:
         model = RecruiterProfile
         fields = [
+            "recruiter_name",
+            "recruiter_email",
             "company",
+            "company_name",
             "phone",
             "designation",
+            "profile_photo",
             "created_at",
             "updated_at",
         ]
+
         read_only_fields = [
+            "recruiter_name",
+            "recruiter_email",
+            "company_name",
             "created_at",
             "updated_at",
         ]
+
+
 
 class CompanySerializer(serializers.ModelSerializer):
     class Meta:

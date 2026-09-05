@@ -35,6 +35,19 @@ class CandidateProfile(models.Model):
     bio = models.TextField(blank=True)
     education = models.TextField(blank=True)
     experience = models.TextField(blank=True)
+
+    profile_photo = models.ImageField(
+        upload_to="profile_photos/",
+        blank=True,
+        null=True
+    )
+
+    resume = models.FileField(
+        upload_to="resumes/",
+        blank=True,
+        null=True
+    )
+
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -54,6 +67,13 @@ class RecruiterProfile(models.Model):
     )
     phone = models.CharField(max_length=15, blank=True)
     designation = models.CharField(max_length=100, blank=True)
+
+    profile_photo = models.ImageField(
+        upload_to="profile_photos/",
+        blank=True,
+        null=True
+    )
+
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 

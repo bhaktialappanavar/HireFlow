@@ -5,8 +5,21 @@ function RecruiterApplications() {
   const [applications, setApplications] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
-  const [selectedApplication, setSelectedApplication] = useState(null);
+
+  const [selectedApplication, setSelectedApplication] =
+    useState(null);
+
   const [updatingId, setUpdatingId] = useState(null);
+
+  // Candidate profile
+  const [selectedCandidate, setSelectedCandidate] =
+    useState(null);
+
+  const [candidateLoadingId, setCandidateLoadingId] =
+    useState(null);
+
+  const [candidateError, setCandidateError] =
+    useState("");
 
   useEffect(() => {
     loadApplications();
@@ -18,9 +31,14 @@ function RecruiterApplications() {
       setLoading(true);
       setError("");
 
-      const response = await api.get("/jobs/applications/recruiter/");
+      const response = await api.get(
+        "/jobs/applications/recruiter/"
+      );
 
-      console.log("Recruiter applications:", response.data);
+      console.log(
+        "Recruiter applications:",
+        response.data
+      );
 
       if (Array.isArray(response.data)) {
         setApplications(response.data);
@@ -37,8 +55,43 @@ function RecruiterApplications() {
     }
   };
 
+  // View candidate profile
+  const handleViewCandidate = async (applicationId) => {
+    try {
+      setCandidateLoadingId(applicationId);
+      setCandidateError("");
+      setSelectedCandidate(null);
+      setSelectedApplication(null);
+
+      const response = await api.get(
+        `/jobs/applications/${applicationId}/candidate/`
+      );
+
+      console.log(
+        "Candidate profile:",
+        response.data
+      );
+
+      setSelectedCandidate(response.data);
+    } catch (error) {
+      console.error(
+        "Candidate profile error:",
+        error
+      );
+
+      setCandidateError(
+        "Unable to load candidate profile."
+      );
+    } finally {
+      setCandidateLoadingId(null);
+    }
+  };
+
   // Update application status
-  const updateStatus = async (applicationId, status) => {
+  const updateStatus = async (
+    applicationId,
+    status
+  ) => {
     try {
       setUpdatingId(applicationId);
       setError("");
@@ -50,7 +103,7 @@ function RecruiterApplications() {
         }
       );
 
-      // Update the application in the list immediately
+      // Update application list immediately
       setApplications((currentApplications) =>
         currentApplications.map((application) =>
           application.id === applicationId
@@ -62,20 +115,25 @@ function RecruiterApplications() {
         )
       );
 
-      // Update modal data if it is open
-      setSelectedApplication((currentApplication) =>
-        currentApplication &&
-        currentApplication.id === applicationId
-          ? {
-              ...currentApplication,
-              status: status,
-            }
-          : currentApplication
+      // Update application modal if open
+      setSelectedApplication(
+        (currentApplication) =>
+          currentApplication &&
+          currentApplication.id === applicationId
+            ? {
+                ...currentApplication,
+                status: status,
+              }
+            : currentApplication
       );
     } catch (error) {
-      console.error("Status update error:", error);
+      console.error(
+        "Status update error:",
+        error
+      );
 
-      const responseData = error.response?.data;
+      const responseData =
+        error.response?.data;
 
       if (responseData?.detail) {
         setError(responseData.detail);
@@ -86,7 +144,9 @@ function RecruiterApplications() {
             : responseData.status
         );
       } else {
-        setError("Unable to update application status.");
+        setError(
+          "Unable to update application status."
+        );
       }
     } finally {
       setUpdatingId(null);
@@ -128,7 +188,9 @@ function RecruiterApplications() {
     return status
       .replace("_", " ")
       .toLowerCase()
-      .replace(/\b\w/g, (letter) => letter.toUpperCase());
+      .replace(/\b\w/g, (letter) =>
+        letter.toUpperCase()
+      );
   };
 
   // Format date
@@ -137,11 +199,14 @@ function RecruiterApplications() {
       return "Not available";
     }
 
-    return new Date(date).toLocaleDateString("en-IN", {
-      day: "numeric",
-      month: "short",
-      year: "numeric",
-    });
+    return new Date(date).toLocaleDateString(
+      "en-IN",
+      {
+        day: "numeric",
+        month: "short",
+        year: "numeric",
+      }
+    );
   };
 
   // Candidate initials
@@ -153,7 +218,9 @@ function RecruiterApplications() {
     const parts = name.trim().split(" ");
 
     if (parts.length === 1) {
-      return parts[0].charAt(0).toUpperCase();
+      return parts[0]
+        .charAt(0)
+        .toUpperCase();
     }
 
     return (
@@ -176,9 +243,12 @@ function RecruiterApplications() {
   return (
     <div className="recruiter-applications-page">
 
-      {/* Hero */}
+      {/* =========================
+          HERO
+      ========================== */}
       <section className="recruiter-applications-hero">
         <div className="recruiter-applications-hero-content">
+
           <span className="recruiter-applications-badge">
             👥 TALENT MANAGEMENT
           </span>
@@ -188,17 +258,22 @@ function RecruiterApplications() {
           </h1>
 
           <p>
-            Review candidates, manage applications and
-            find the right talent for your company.
+            Review candidates, manage applications
+            and find the right talent for your company.
           </p>
+
         </div>
       </section>
 
-      {/* Main Content */}
+
+      {/* =========================
+          MAIN CONTENT
+      ========================== */}
       <section className="recruiter-applications-container">
 
         {/* Header */}
         <div className="recruiter-applications-header">
+
           <div>
             <h2>Applications Received</h2>
 
@@ -206,7 +281,9 @@ function RecruiterApplications() {
               {applications.length === 0
                 ? "No applications received yet."
                 : `${applications.length} application${
-                    applications.length !== 1 ? "s" : ""
+                    applications.length !== 1
+                      ? "s"
+                      : ""
                   } received`}
             </p>
           </div>
@@ -217,7 +294,9 @@ function RecruiterApplications() {
           >
             ↻ Refresh
           </button>
+
         </div>
+
 
         {/* Error */}
         {error && (
@@ -226,23 +305,30 @@ function RecruiterApplications() {
           </div>
         )}
 
+
         {/* Empty State */}
-        {applications.length === 0 && !error && (
-          <div className="recruiter-applications-empty">
-            <div className="recruiter-empty-icon">
-              📋
+        {applications.length === 0 &&
+          !error && (
+            <div className="recruiter-applications-empty">
+
+              <div className="recruiter-empty-icon">
+                📋
+              </div>
+
+              <h2>No applications yet</h2>
+
+              <p>
+                Applications from candidates will
+                appear here when they apply to your jobs.
+              </p>
+
             </div>
+          )}
 
-            <h2>No applications yet</h2>
 
-            <p>
-              Applications from candidates will appear
-              here when they apply to your jobs.
-            </p>
-          </div>
-        )}
-
-        {/* Applications */}
+        {/* =========================
+            APPLICATION LIST
+        ========================== */}
         {applications.length > 0 && (
           <div className="recruiter-applications-list">
 
@@ -262,6 +348,7 @@ function RecruiterApplications() {
                   </div>
 
                   <div className="candidate-details">
+
                     <h2>
                       {application.candidate_name ||
                         "Candidate"}
@@ -271,6 +358,7 @@ function RecruiterApplications() {
                       {application.candidate_email ||
                         "Email not available"}
                     </p>
+
                   </div>
 
                   <span
@@ -278,10 +366,13 @@ function RecruiterApplications() {
                       application.status
                     )}`}
                   >
-                    {formatStatus(application.status)}
+                    {formatStatus(
+                      application.status
+                    )}
                   </span>
 
                 </div>
+
 
                 {/* Job Information */}
                 <div className="recruiter-application-info">
@@ -299,6 +390,7 @@ function RecruiterApplications() {
                     </div>
                   </div>
 
+
                   <div className="recruiter-info-item">
                     <span>🏢</span>
 
@@ -312,6 +404,7 @@ function RecruiterApplications() {
                     </div>
                   </div>
 
+
                   <div className="recruiter-info-item">
                     <span>📍</span>
 
@@ -324,6 +417,7 @@ function RecruiterApplications() {
                       </strong>
                     </div>
                   </div>
+
 
                   <div className="recruiter-info-item">
                     <span>📅</span>
@@ -341,33 +435,64 @@ function RecruiterApplications() {
 
                 </div>
 
+
                 {/* Cover Letter */}
                 {application.cover_letter && (
                   <div className="recruiter-cover-letter">
+
                     <h3>Cover Letter</h3>
 
                     <p>
                       {application.cover_letter}
                     </p>
+
                   </div>
                 )}
 
-                {/* Actions */}
+
+                {/* =========================
+                    CARD ACTIONS
+                ========================== */}
                 <div className="recruiter-application-footer">
 
-                  <button
-                    className="view-application-button"
-                    onClick={() =>
-                      setSelectedApplication(application)
-                    }
-                  >
-                    View Application
-                  </button>
+                  <div className="application-view-actions">
+
+                    {/* View Application */}
+                    <button
+                      className="view-application-button"
+                      onClick={() =>
+                        setSelectedApplication(
+                          application
+                        )
+                      }
+                    >
+                      View Application
+                    </button>
+
+
+                    {/* View Candidate */}
+                    <button
+                      className="view-candidate-button"
+                      onClick={() =>
+                        handleViewCandidate(
+                          application.id
+                        )
+                      }
+                      disabled={candidateLoadingId !== null}
+                    >
+                      {candidateLoadingId === application.id
+                        ? "Loading..."
+                        : "View Candidate"}
+                    </button>
+
+                  </div>
+
 
                   <div className="application-actions">
 
                     {/* Move to Under Review */}
-                    {application.status === "APPLIED" && (
+                    {application.status ===
+                      "APPLIED" && (
                       <button
                         className="review-button"
                         onClick={() =>
@@ -377,14 +502,17 @@ function RecruiterApplications() {
                           )
                         }
                         disabled={
-                          updatingId === application.id
+                          updatingId ===
+                          application.id
                         }
                       >
-                        {updatingId === application.id
+                        {updatingId ===
+                        application.id
                           ? "Updating..."
                           : "Review"}
                       </button>
                     )}
+
 
                     {/* Shortlist */}
                     {application.status !==
@@ -406,11 +534,13 @@ function RecruiterApplications() {
                             application.id
                           }
                         >
-                          {updatingId === application.id
+                          {updatingId ===
+                          application.id
                             ? "Updating..."
                             : "✓ Shortlist"}
                         </button>
                       )}
+
 
                     {/* Move to Interview */}
                     {application.status ===
@@ -428,11 +558,13 @@ function RecruiterApplications() {
                           application.id
                         }
                       >
-                        {updatingId === application.id
+                        {updatingId ===
+                        application.id
                           ? "Updating..."
                           : "🎯 Interview"}
                       </button>
                     )}
+
 
                     {/* Select */}
                     {application.status ===
@@ -450,11 +582,13 @@ function RecruiterApplications() {
                           application.id
                         }
                       >
-                        {updatingId === application.id
+                        {updatingId ===
+                        application.id
                           ? "Updating..."
                           : "✓ Select Candidate"}
                       </button>
                     )}
+
 
                     {/* Reject */}
                     {application.status !==
@@ -479,6 +613,7 @@ function RecruiterApplications() {
                       )}
 
                   </div>
+
                 </div>
 
               </div>
@@ -489,7 +624,10 @@ function RecruiterApplications() {
 
       </section>
 
-      {/* Application Modal */}
+
+      {/* =================================================
+          APPLICATION MODAL
+      ================================================== */}
       {selectedApplication && (
         <div
           className="application-modal-overlay"
@@ -500,12 +638,16 @@ function RecruiterApplications() {
 
           <div
             className="application-modal"
-            onClick={(e) => e.stopPropagation()}
+            onClick={(e) =>
+              e.stopPropagation()
+            }
           >
 
+            {/* Modal Header */}
             <div className="application-modal-header">
 
               <div>
+
                 <span className="modal-label">
                   CANDIDATE APPLICATION
                 </span>
@@ -519,7 +661,9 @@ function RecruiterApplications() {
                   {selectedApplication.candidate_email ||
                     "Email not available"}
                 </p>
+
               </div>
+
 
               <button
                 className="modal-close-button"
@@ -532,7 +676,10 @@ function RecruiterApplications() {
 
             </div>
 
+
+            {/* Status */}
             <div className="modal-status-section">
+
               <span
                 className={`recruiter-application-status ${getStatusClass(
                   selectedApplication.status
@@ -542,36 +689,46 @@ function RecruiterApplications() {
                   selectedApplication.status
                 )}
               </span>
+
             </div>
 
+
+            {/* Job Details */}
             <div className="modal-job-details">
 
               <div>
                 <small>Applied For</small>
+
                 <strong>
                   {selectedApplication.job_title ||
                     "Job Position"}
                 </strong>
               </div>
 
+
               <div>
                 <small>Company</small>
+
                 <strong>
                   {selectedApplication.company_name ||
                     "Company"}
                 </strong>
               </div>
 
+
               <div>
                 <small>Location</small>
+
                 <strong>
                   {selectedApplication.job_location ||
                     "Not specified"}
                 </strong>
               </div>
 
+
               <div>
                 <small>Applied On</small>
+
                 <strong>
                   {formatDate(
                     selectedApplication.applied_at
@@ -581,18 +738,40 @@ function RecruiterApplications() {
 
             </div>
 
+
+            {/* Cover Letter */}
             <div className="modal-cover-letter">
+
               <h3>Cover Letter</h3>
 
               <p>
                 {selectedApplication.cover_letter ||
                   "No cover letter provided."}
               </p>
+
             </div>
+
 
             {/* Modal Actions */}
             <div className="modal-actions">
 
+              {/* View Candidate */}
+              <button
+                className="view-candidate-button"
+                onClick={() =>
+                  handleViewCandidate(
+                    selectedApplication.id
+                  )
+                }
+                disabled={candidateLoadingId !== null}
+              >
+                {candidateLoadingId === selectedApplication.id
+                  ? "Loading Candidate..."
+                  : "View Candidate Profile"}
+              </button>
+
+
+              {/* Review */}
               {selectedApplication.status ===
                 "APPLIED" && (
                 <button
@@ -612,6 +791,8 @@ function RecruiterApplications() {
                 </button>
               )}
 
+
+              {/* Shortlist */}
               {selectedApplication.status !==
                 "SHORTLISTED" &&
                 selectedApplication.status !==
@@ -635,6 +816,8 @@ function RecruiterApplications() {
                 </button>
               )}
 
+
+              {/* Interview */}
               {selectedApplication.status ===
                 "SHORTLISTED" && (
                 <button
@@ -654,6 +837,8 @@ function RecruiterApplications() {
                 </button>
               )}
 
+
+              {/* Select */}
               {selectedApplication.status ===
                 "INTERVIEW" && (
                 <button
@@ -673,6 +858,8 @@ function RecruiterApplications() {
                 </button>
               )}
 
+
+              {/* Reject */}
               {selectedApplication.status !==
                 "REJECTED" &&
                 selectedApplication.status !==
@@ -695,6 +882,254 @@ function RecruiterApplications() {
               )}
 
             </div>
+
+          </div>
+
+        </div>
+      )}
+
+
+      {/* =================================================
+          CANDIDATE PROFILE MODAL
+      ================================================== */}
+
+      {(candidateLoadingId !== null ||
+        candidateError ||
+        selectedCandidate) && (
+
+        <div
+          className="candidate-modal-overlay"
+          onClick={() => {
+            if (candidateLoadingId === null) {
+              setSelectedCandidate(null);
+              setCandidateError("");
+            }
+          }}
+        >
+
+          <div
+            className="candidate-modal"
+            onClick={(e) =>
+              e.stopPropagation()
+            }
+          >
+
+            {/* Loading */}
+            {candidateLoadingId !== null && (
+              <div className="candidate-loading">
+
+                <div className="loading-spinner"></div>
+
+                <p>
+                  Loading candidate profile...
+                </p>
+
+              </div>
+            )}
+
+
+            {/* Error */}
+            {candidateLoadingId === null &&
+              candidateError && (
+                <div className="candidate-error">
+
+                  <h3>
+                    Unable to load profile
+                  </h3>
+
+                  <p>
+                    {candidateError}
+                  </p>
+
+                  <button
+                    className="view-application-button"
+                    onClick={() => {
+                      setCandidateError("");
+                      setSelectedCandidate(null);
+                    }}
+                  >
+                    Close
+                  </button>
+
+                </div>
+              )}
+
+
+            {/* Candidate Profile */}
+            {candidateLoadingId === null &&
+              !candidateError &&
+              selectedCandidate && (
+                <>
+
+                  {/* Header */}
+                  <div className="candidate-modal-header">
+
+                    <div className="candidate-modal-title">
+
+                      <span className="candidate-profile-badge">
+                        CANDIDATE PROFILE
+                      </span>
+
+                      <h2>
+                        {selectedCandidate.candidate_name ||
+                          "Candidate"}
+                      </h2>
+
+                      <p>
+                        {selectedCandidate.candidate_email ||
+                          "Email not available"}
+                      </p>
+
+                    </div>
+
+
+                    <button
+                      className="candidate-modal-close"
+                      onClick={() =>
+                        setSelectedCandidate(null)
+                      }
+                    >
+                      ×
+                    </button>
+
+                  </div>
+
+
+                  {/* Contact Information */}
+                  <div className="candidate-modal-section">
+
+                    <h3>
+                      Contact Information
+                    </h3>
+
+                    <div className="candidate-profile-info-grid">
+
+                      <div>
+                        <span>📧</span>
+
+                        <div>
+                          <small>Email</small>
+
+                          <p>
+                            {selectedCandidate.candidate_email ||
+                              "Not provided"}
+                          </p>
+                        </div>
+                      </div>
+
+
+                      <div>
+                        <span>📱</span>
+
+                        <div>
+                          <small>Phone</small>
+
+                          <p>
+                            {selectedCandidate.phone ||
+                              "Not provided"}
+                          </p>
+                        </div>
+                      </div>
+
+
+                      <div>
+                        <span>📍</span>
+
+                        <div>
+                          <small>Location</small>
+
+                          <p>
+                            {selectedCandidate.location ||
+                              "Not provided"}
+                          </p>
+                        </div>
+                      </div>
+
+                    </div>
+
+                  </div>
+
+
+                  {/* Professional Bio */}
+                  <div className="candidate-modal-section">
+
+                    <h3>
+                      Professional Bio
+                    </h3>
+
+                    <p className="candidate-profile-text">
+                      {selectedCandidate.bio ||
+                        "No professional bio provided."}
+                    </p>
+
+                  </div>
+
+
+                  {/* Education */}
+                  <div className="candidate-modal-section">
+
+                    <h3>
+                      Education
+                    </h3>
+
+                    <p className="candidate-profile-text">
+                      {selectedCandidate.education ||
+                        "Education information not provided."}
+                    </p>
+
+                  </div>
+
+
+                  {/* Experience */}
+                  <div className="candidate-modal-section">
+
+                    <h3>
+                      Experience
+                    </h3>
+
+                    <p className="candidate-profile-text">
+                      {selectedCandidate.experience ||
+                        "Experience information not provided."}
+                    </p>
+
+                  </div>
+
+
+                  {/* Resume */}
+                  <div className="candidate-modal-resume">
+
+                    <div>
+
+                      <h3>
+                        Resume
+                      </h3>
+
+                      <p>
+                        {selectedCandidate.resume
+                          ? "Candidate has uploaded a resume."
+                          : "No resume uploaded."}
+                      </p>
+
+                    </div>
+
+
+                    {selectedCandidate.resume && (
+                      <a
+                        href={
+                          selectedCandidate.resume
+                        }
+                        target="_blank"
+                        rel="noreferrer"
+                        className="view-resume-button"
+                      >
+                        📄 View Resume
+                      </a>
+                    )}
+
+                  </div>
+
+                </>
+              )}
 
           </div>
 

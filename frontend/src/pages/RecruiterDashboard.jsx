@@ -5,14 +5,20 @@ import api from "../services/api";
 function RecruiterDashboard() {
   const [stats, setStats] = useState(null);
   const [jobs, setJobs] = useState([]);
+  const [profile, setProfile] = useState(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchDashboardData = async () => {
       try {
-        const [statsResponse, jobsResponse] = await Promise.all([
+        const [
+          statsResponse,
+          jobsResponse,
+          profileResponse,
+        ] = await Promise.all([
           api.get("/jobs/applications/stats/"),
           api.get("/jobs/my/"),
+          api.get("/auth/recruiter-profile/"),
         ]);
 
         const jobsData =
@@ -20,9 +26,12 @@ function RecruiterDashboard() {
 
         console.log("Recruiter stats:", statsResponse.data);
         console.log("Recruiter jobs:", jobsData);
+        console.log("Recruiter profile:", profileResponse.data);
 
         setStats(statsResponse.data);
         setJobs(jobsData);
+        setProfile(profileResponse.data);
+
       } catch (error) {
         console.error("Dashboard error:", error);
       } finally {
@@ -46,9 +55,74 @@ function RecruiterDashboard() {
   return (
     <div className="dashboard-page">
 
+      {/* Recruiter Profile Summary */}
+
+      {profile && (
+        <div className="recruiter-dashboard-profile">
+
+          <div className="recruiter-dashboard-photo">
+
+            {profile.profile_photo ? (
+              <img
+                src={profile.profile_photo}
+                alt="Recruiter Profile"
+              />
+            ) : (
+              <div className="recruiter-dashboard-photo-placeholder">
+                👤
+              </div>
+            )}
+
+          </div>
+
+          <div className="recruiter-dashboard-info">
+
+            <span className="recruiter-dashboard-label">
+              RECRUITER
+            </span>
+
+            <h2>
+              {profile.recruiter_name || "Recruiter"}
+            </h2>
+
+            <p>
+              {profile.designation || "Recruiter"}
+            </p>
+
+            <p>
+              🏢 {profile.company_name || profile.company || "Company"}
+            </p>
+
+            {profile.phone && (
+              <p>
+                📞 {profile.phone}
+              </p>
+            )}
+
+            {profile.recruiter_email && (
+              <p>
+                ✉️ {profile.recruiter_email}
+              </p>
+            )}
+
+          </div>
+
+          <Link
+            to="/recruiter-profile"
+            className="recruiter-dashboard-profile-button"
+          >
+            Edit Profile
+          </Link>
+
+        </div>
+      )}
+
       {/* Header */}
+
       <div className="dashboard-header">
+
         <div>
+
           <span className="dashboard-badge">
             RECRUITER PORTAL
           </span>
@@ -59,18 +133,25 @@ function RecruiterDashboard() {
             Manage your job postings and track candidate
             applications from one place.
           </p>
+
         </div>
 
-        <Link to="/create-job" className="dashboard-primary-button">
+        <Link
+          to="/create-job"
+          className="dashboard-primary-button"
+        >
           + Post a Job
         </Link>
+
       </div>
 
       {/* Statistics */}
+
       <div className="dashboard-stats">
 
         <div className="stat-card">
           <div className="stat-icon">💼</div>
+
           <div>
             <span>Total Jobs</span>
             <strong>{jobs.length}</strong>
@@ -79,6 +160,7 @@ function RecruiterDashboard() {
 
         <div className="stat-card">
           <div className="stat-icon">📩</div>
+
           <div>
             <span>Total Applications</span>
             <strong>{stats?.total || 0}</strong>
@@ -87,6 +169,7 @@ function RecruiterDashboard() {
 
         <div className="stat-card">
           <div className="stat-icon">⭐</div>
+
           <div>
             <span>Shortlisted</span>
             <strong>{stats?.SHORTLISTED || 0}</strong>
@@ -95,6 +178,7 @@ function RecruiterDashboard() {
 
         <div className="stat-card">
           <div className="stat-icon">🎯</div>
+
           <div>
             <span>Selected</span>
             <strong>{stats?.SELECTED || 0}</strong>
@@ -104,12 +188,15 @@ function RecruiterDashboard() {
       </div>
 
       {/* Main Content */}
+
       <div className="dashboard-grid">
 
         {/* My Jobs */}
+
         <div className="dashboard-section">
 
           <div className="section-header">
+
             <div>
               <h2>My Jobs</h2>
               <p>Manage your recent job postings.</p>
@@ -118,12 +205,17 @@ function RecruiterDashboard() {
             <Link to="/my-jobs">
               View All →
             </Link>
+
           </div>
 
           {jobs.length === 0 ? (
+
             <div className="dashboard-empty">
+
               <div>💼</div>
+
               <h3>No jobs posted yet</h3>
+
               <p>
                 Create your first job posting to start
                 receiving applications.
@@ -135,18 +227,28 @@ function RecruiterDashboard() {
               >
                 Post Your First Job
               </Link>
+
             </div>
+
           ) : (
+
             <div className="dashboard-job-list">
 
               {jobs.slice(0, 4).map((job) => (
-                <div className="dashboard-job-card" key={job.id}>
+
+                <div
+                  className="dashboard-job-card"
+                  key={job.id}
+                >
 
                   <div>
+
                     <h3>{job.title}</h3>
 
                     <p>
-                      📍 {job.location || "Location not specified"}
+                      📍{" "}
+                      {job.location ||
+                        "Location not specified"}
                     </p>
 
                     <span
@@ -156,6 +258,7 @@ function RecruiterDashboard() {
                     >
                       {job.status}
                     </span>
+
                   </div>
 
                   <Link
@@ -166,21 +269,26 @@ function RecruiterDashboard() {
                   </Link>
 
                 </div>
+
               ))}
 
             </div>
+
           )}
 
         </div>
 
         {/* Quick Actions */}
+
         <div className="dashboard-section quick-actions-section">
 
           <div className="section-header">
+
             <div>
               <h2>Quick Actions</h2>
               <p>Common recruiter tasks.</p>
             </div>
+
           </div>
 
           <div className="quick-actions">
@@ -190,6 +298,7 @@ function RecruiterDashboard() {
               className="quick-action-card"
             >
               <span>➕</span>
+
               <div>
                 <h3>Post a Job</h3>
                 <p>Create a new job opportunity.</p>
@@ -201,6 +310,7 @@ function RecruiterDashboard() {
               className="quick-action-card"
             >
               <span>💼</span>
+
               <div>
                 <h3>Manage Jobs</h3>
                 <p>Edit, close or delete your jobs.</p>
@@ -212,6 +322,7 @@ function RecruiterDashboard() {
               className="quick-action-card"
             >
               <span>📩</span>
+
               <div>
                 <h3>Applications</h3>
                 <p>Review and manage candidates.</p>
@@ -225,13 +336,16 @@ function RecruiterDashboard() {
       </div>
 
       {/* Recruitment Overview */}
+
       <div className="dashboard-section overview-section">
 
         <div className="section-header">
+
           <div>
             <h2>Recruitment Overview</h2>
             <p>Current application pipeline.</p>
           </div>
+
         </div>
 
         <div className="pipeline">
@@ -275,3 +389,4 @@ function RecruiterDashboard() {
 }
 
 export default RecruiterDashboard;
+

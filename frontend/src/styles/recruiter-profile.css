@@ -1,13 +1,16 @@
 .recruiter-profile-page {
   min-height: calc(100vh - 70px);
   padding: 50px 20px;
-  background: #f8fafc;
+  background: #f5f7fb;
 }
 
 .recruiter-profile-container {
-  max-width: 800px;
+  width: 100%;
+  max-width: 900px;
   margin: 0 auto;
 }
+
+/* Header */
 
 .profile-header {
   text-align: center;
@@ -16,56 +19,75 @@
 
 .profile-badge {
   display: inline-block;
-  padding: 8px 14px;
+  padding: 7px 14px;
   border-radius: 20px;
-  background: #e0e7ff;
-  color: #4338ca;
+  background: #e8f0ff;
+  color: #2563eb;
   font-size: 12px;
   font-weight: 700;
+  letter-spacing: 0.5px;
+  margin-bottom: 12px;
 }
 
 .profile-header h1 {
-  margin: 15px 0 8px;
-  font-size: 32px;
+  margin: 0 0 8px;
+  font-size: 34px;
+  font-weight: 700;
+  color: #111827;
 }
 
 .profile-header p {
-  color: #64748b;
+  margin: 0;
+  color: #6b7280;
+  font-size: 16px;
 }
 
+/* Main Card */
+
 .profile-card {
-  background: white;
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
   border-radius: 16px;
-  padding: 30px;
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+  padding: 32px;
+  box-shadow: 0 8px 25px rgba(15, 23, 42, 0.06);
 }
+
+/* Card Header */
 
 .profile-card-header {
   display: flex;
   align-items: center;
-  gap: 15px;
-  margin-bottom: 30px;
+  gap: 16px;
+  padding-bottom: 25px;
+  margin-bottom: 28px;
+  border-bottom: 1px solid #e5e7eb;
 }
 
 .profile-icon {
-  width: 55px;
-  height: 55px;
+  width: 52px;
+  height: 52px;
+  border-radius: 12px;
+  background: #eff6ff;
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 50%;
-  background: #eef2ff;
-  font-size: 25px;
+  font-size: 24px;
+  flex-shrink: 0;
 }
 
 .profile-card-header h2 {
-  margin: 0 0 5px;
+  margin: 0 0 4px;
+  font-size: 21px;
+  color: #111827;
 }
 
 .profile-card-header p {
   margin: 0;
-  color: #64748b;
+  color: #6b7280;
+  font-size: 14px;
 }
+
+/* Form */
 
 .form-group {
   margin-bottom: 22px;
@@ -74,78 +96,197 @@
 .form-group label {
   display: block;
   margin-bottom: 8px;
+  font-size: 14px;
   font-weight: 600;
+  color: #374151;
 }
 
 .form-group input {
   width: 100%;
   padding: 12px 14px;
-  border: 1px solid #cbd5e1;
+  border: 1px solid #d1d5db;
   border-radius: 8px;
+  background: #ffffff;
+  color: #111827;
   font-size: 15px;
-  box-sizing: border-box;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
 }
 
 .form-group input:focus {
-  outline: none;
-  border-color: #6366f1;
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
 }
 
 .form-group input:disabled {
-  background: #f1f5f9;
-  color: #64748b;
+  background: #f3f4f6;
+  color: #6b7280;
+  cursor: not-allowed;
 }
 
 .form-group small {
   display: block;
-  margin-top: 6px;
-  color: #64748b;
+  margin-top: 7px;
+  color: #6b7280;
+  font-size: 12px;
+  line-height: 1.5;
 }
 
+/* Messages */
+
 .profile-success {
-  padding: 12px;
-  margin-bottom: 20px;
+  padding: 12px 14px;
+  margin: 8px 0 20px;
   border-radius: 8px;
-  background: #dcfce7;
-  color: #166534;
+  background: #ecfdf5;
+  border: 1px solid #a7f3d0;
+  color: #047857;
+  font-size: 14px;
 }
 
 .profile-error {
-  padding: 12px;
-  margin-bottom: 20px;
+  padding: 12px 14px;
+  margin: 8px 0 20px;
   border-radius: 8px;
-  background: #fee2e2;
-  color: #991b1b;
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  color: #b91c1c;
+  font-size: 14px;
 }
+
+/* Actions */
 
 .profile-actions {
   display: flex;
   justify-content: flex-end;
+  margin-top: 28px;
+  padding-top: 24px;
+  border-top: 1px solid #e5e7eb;
 }
 
 .save-profile-button {
   border: none;
   border-radius: 8px;
-  padding: 12px 24px;
-  background: #4f46e5;
-  color: white;
+  padding: 12px 22px;
+  background: #2563eb;
+  color: #ffffff;
+  font-size: 14px;
   font-weight: 600;
-  cursor: pointer;
+  transition: background 0.2s, transform 0.2s;
 }
 
-.save-profile-button:hover {
-  background: #4338ca;
+.save-profile-button:hover:not(:disabled) {
+  background: #1d4ed8;
+  transform: translateY(-1px);
 }
 
 .save-profile-button:disabled {
-  opacity: 0.6;
+  background: #93c5fd;
   cursor: not-allowed;
 }
 
+/* Loading */
+
 .profile-loading {
-  min-height: 60vh;
+  min-height: calc(100vh - 70px);
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #64748b;
+  background: #f5f7fb;
+  color: #6b7280;
+  font-size: 16px;
 }
+
+/* Responsive */
+
+@media (max-width: 600px) {
+  .recruiter-profile-page {
+    padding: 30px 15px;
+  }
+
+  .profile-card {
+    padding: 22px;
+  }
+
+  .profile-header h1 {
+    font-size: 28px;
+  }
+
+  .profile-card-header {
+    align-items: flex-start;
+  }
+
+  .profile-actions {
+    justify-content: stretch;
+  }
+
+  .save-profile-button {
+    width: 100%;
+  }
+}
+
+
+/* Recruiter Profile Photo */
+
+.recruiter-profile-photo-section {
+  display: flex;
+  align-items: center;
+  gap: 25px;
+  margin-bottom: 30px;
+  padding-bottom: 25px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.recruiter-profile-photo-preview {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 3px solid #e5e7eb;
+  background: #f3f4f6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.recruiter-profile-photo-preview img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.recruiter-profile-photo-placeholder {
+  font-size: 42px;
+  color: #9ca3af;
+}
+
+.recruiter-profile-photo-upload {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.recruiter-profile-photo-upload label {
+  font-weight: 600;
+  color: #374151;
+}
+
+.recruiter-profile-photo-upload input[type="file"] {
+  padding: 10px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  background: #ffffff;
+}
+
+.recruiter-profile-photo-upload small {
+  color: #6b7280;
+}
+
+@media (max-width: 600px) {
+  .recruiter-profile-photo-section {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+

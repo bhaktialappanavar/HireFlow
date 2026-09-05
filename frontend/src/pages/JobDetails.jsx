@@ -1,16 +1,24 @@
 import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link,useNavigate, useParams } from "react-router-dom";
 import api from "../services/api";
 import "../styles/job-details.css";
 
 function JobDetails() {
   const { id } = useParams();
+  const navigate = useNavigate();
 
   const [job, setJob] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
   useEffect(() => {
+    const token = localStorage.getItem("access_token");
+    
+    if (!token) {
+      navigate("/login");
+      return;
+    }
+
     api
       .get(`/jobs/${id}/`)
       .then((response) => {

@@ -180,6 +180,7 @@ class RecruiterApplicationsView(generics.ListAPIView):
     serializer_class = ApplicationSerializer
     permission_classes = [
         IsAuthenticated,
+        IsRecruiter,
     ]
 
     def get_queryset(self):
@@ -246,3 +247,36 @@ class ApplicationDetailView(generics.RetrieveAPIView):
                 job__recruiter=user.recruiter_profile
             )
         return Application.objects.none()
+
+class RecruiterCandidateProfileView(generics.RetrieveAPIView):
+    permission_classes = [
+        IsAuthenticated,
+        IsRecruiter,
+    ]
+
+    def get(self, request, pk):
+        try:
+            application = Application.objects.get(
+                pk=pk,
+                job__recruiter=request.user.recruiter_profile
+            )
+        except Application.DoesNotExist:
+            return Response(
+                {"detail": "Application not found."},
+                status=404
+            )
+
+        candidate = application.candidate
+
+        return Response({
+            "application_id": application.id,
+            "candidate_name": candidate.user.get_full_name(),
+            "candidate_email": candidate.user.email,
+            "phone": candidate.phone,
+            "location": candidate.location,
+            "bio": candidate.bio,
+            "education": candidate.education,
+            "experience": candidate.experience,
+            "resume": request.build_absolute_uri(candidate.resume.url)
+            if candidate.resume else None,
+        })

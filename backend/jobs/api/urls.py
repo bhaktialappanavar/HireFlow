@@ -15,6 +15,7 @@ from .views import (
     ApplicationDetailView,
     RecruiterApplicationStatsView,
     CandidateApplicationStatsView,
+    RecruiterCandidateProfileView,
 )
 
 urlpatterns = [
@@ -89,6 +90,12 @@ urlpatterns = [
     ),
 
     path(
+    "applications/<int:pk>/candidate/",
+    RecruiterCandidateProfileView.as_view(),
+    name="recruiter-candidate-profile",
+    ),
+
+    path(
         "applications/<int:pk>/",
         ApplicationDetailView.as_view(),
         name="application-detail",
@@ -105,5 +112,5 @@ urlpatterns = [
         "applications/stats/",
         RecruiterApplicationStatsView.as_view(),
         name="recruiter-application-stats",
-    )
+    ),
 ]

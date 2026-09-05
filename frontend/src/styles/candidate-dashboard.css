@@ -261,3 +261,22 @@
     align-items: flex-start;
   }
 }
+
+.candidate-profile-avatar {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  font-size: 32px;
+  font-weight: 700;
+}
+
+.candidate-profile-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}

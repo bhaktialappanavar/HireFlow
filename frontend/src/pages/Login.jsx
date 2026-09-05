@@ -1,77 +1,223 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import api from "../services/api";
+import "../styles/login.css";
 
 function Login() {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
-
   const navigate = useNavigate();
 
-  const handleLogin = async (e) => {
+  const [formData, setFormData] = useState({
+    username: "",
+    password: "",
+  });
+
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
+
     setError("");
+    setLoading(true);
 
     try {
-      const response = await api.post("/auth/login/", {
-        username: username,
-        password: password,
-      });
+      // Login using username and password
+      const response = await api.post("/auth/login/", formData);
 
-      localStorage.setItem("access_token", response.data.access);
-      localStorage.setItem("refresh_token", response.data.refresh);
+      const accessToken = response.data.access;
+      const refreshToken = response.data.refresh;
 
-      const userResponse = await api.get("/auth/me/", {
-        headers: {
-          Authorization: `Bearer ${response.data.access}`,
-        },
-      });
+      // Store JWT tokens
+      localStorage.setItem("access_token", accessToken);
+      localStorage.setItem("refresh_token", refreshToken);
 
-      localStorage.setItem("user", JSON.stringify(userResponse.data));
+      // Get logged-in user's information
+      const userResponse = await api.get("/auth/me/");
 
-      const role = userResponse.data.role;
+      const user = userResponse.data;
 
-      if (role === "CANDIDATE") {
+      // Store user information
+      localStorage.setItem("user", JSON.stringify(user));
+
+      // Redirect based on role
+      if (user.role === "CANDIDATE") {
         navigate("/candidate-dashboard");
-      } else if (role === "RECRUITER") {
+      } else if (user.role === "RECRUITER") {
         navigate("/recruiter-dashboard");
+      } else {
+        navigate("/");
       }
     } catch (error) {
-      console.error(error);
-      setError("Invalid username or password.");
+      console.error("Login error:", error);
+
+      if (error.response?.data?.detail) {
+        setError(error.response.data.detail);
+      } else if (error.response?.data?.non_field_errors) {
+        setError(error.response.data.non_field_errors[0]);
+      } else {
+        setError("Invalid username or password. Please try again.");
+      }
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
-    <div>
-      <h1>Login</h1>
+    <div className="login-page">
+      <div className="login-container">
 
-      <form onSubmit={handleLogin}>
-        <input
-          type="text"
-          placeholder="Username"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-        />
+        {/* Left Section */}
+        <div className="login-intro">
 
-        <br />
-        <br />
+          <div className="login-brand">
+            <div className="login-brand-icon">H</div>
+            <span>HireFlow</span>
+          </div>
 
-        <input
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
+          <div className="login-intro-content">
 
-        <br />
-        <br />
+            <span className="login-badge">
+              WELCOME BACK
+            </span>
 
-        <button type="submit">Login</button>
-      </form>
+            <h1>
+              Your next opportunity
+              <span> starts here.</span>
+            </h1>
 
-      {error && <p>{error}</p>}
+            <p>
+              Connect with great companies, discover meaningful
+              opportunities, and take the next step in your career.
+            </p>
+
+            <div className="login-benefits">
+
+              <div className="login-benefit">
+                <span>✓</span>
+                <p>Discover relevant job opportunities</p>
+              </div>
+
+              <div className="login-benefit">
+                <span>✓</span>
+                <p>Track your applications easily</p>
+              </div>
+
+              <div className="login-benefit">
+                <span>✓</span>
+                <p>Connect with hiring teams</p>
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+
+        {/* Login Card */}
+        <div className="login-card-wrapper">
+
+          <div className="login-card">
+
+            <div className="login-header">
+              <h2>Welcome back</h2>
+
+              <p>
+                Sign in to continue to your HireFlow account.
+              </p>
+            </div>
+
+            {/* Error Message */}
+            {error && (
+              <div className="login-error">
+                <span>!</span>
+                <p>{error}</p>
+              </div>
+            )}
+
+            <form
+              onSubmit={handleSubmit}
+              className="login-form"
+            >
+
+              {/* Username */}
+              <div className="login-form-group">
+
+                <label htmlFor="username">
+                  Username
+                </label>
+
+                <input
+                  id="username"
+                  type="text"
+                  name="username"
+                  placeholder="Enter your username"
+                  value={formData.username}
+                  onChange={handleChange}
+                  required
+                  autoComplete="username"
+                />
+
+              </div>
+
+              {/* Password */}
+              <div className="login-form-group">
+
+                <div className="login-label-row">
+
+                  <label htmlFor="password">
+                    Password
+                  </label>
+
+                </div>
+
+                <input
+                  id="password"
+                  type="password"
+                  name="password"
+                  placeholder="Enter your password"
+                  value={formData.password}
+                  onChange={handleChange}
+                  required
+                  autoComplete="current-password"
+                />
+
+              </div>
+
+              {/* Login Button */}
+              <button
+                type="submit"
+                className="login-button"
+                disabled={loading}
+              >
+                {loading
+                  ? "Signing in..."
+                  : "Sign In"}
+              </button>
+
+            </form>
+
+            <div className="login-divider">
+              <span>or</span>
+            </div>
+
+            {/* Register Link */}
+            <p className="login-register-text">
+              Don't have an account?
+              <Link to="/register">
+                {" "}Create an account
+              </Link>
+            </p>
+
+          </div>
+        </div>
+
+      </div>
     </div>
   );
 }
