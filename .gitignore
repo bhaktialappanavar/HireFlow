@@ -6,3 +6,5 @@ db.sqlite3
 .idea/
 .vscode
 backend/media/
+media/
+staticfiles/
