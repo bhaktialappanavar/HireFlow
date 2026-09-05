@@ -1,0 +1,183 @@
+/* Candidate Profile */
+
+.candidate-profile-page {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 40px 24px 60px;
+}
+
+.candidate-profile-header {
+  margin-bottom: 30px;
+}
+
+.candidate-profile-badge {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  color: #777;
+}
+
+.candidate-profile-header h1 {
+  margin: 10px 0 8px;
+  font-size: 38px;
+}
+
+.candidate-profile-header p {
+  margin: 0;
+  color: #777;
+}
+
+/* Form */
+
+.candidate-profile-form {
+  background: white;
+  border: 1px solid #e5e5e5;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.profile-form-section {
+  padding: 28px;
+  border-bottom: 1px solid #eee;
+}
+
+.profile-form-section h2 {
+  margin: 0 0 6px;
+  font-size: 21px;
+}
+
+.profile-form-section > p {
+  margin: 0 0 24px;
+  color: #777;
+  font-size: 14px;
+}
+
+/* Fields */
+
+.profile-form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.profile-field {
+  margin-bottom: 20px;
+}
+
+.profile-field:last-child {
+  margin-bottom: 0;
+}
+
+.profile-field label {
+  display: block;
+  margin-bottom: 7px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.profile-field input,
+.profile-field textarea {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 11px 12px;
+  border: 1px solid #d9d9d9;
+  border-radius: 7px;
+  font-family: inherit;
+  font-size: 14px;
+  outline: none;
+  transition: 0.2s ease;
+}
+
+.profile-field textarea {
+  resize: vertical;
+}
+
+.profile-field input:focus,
+.profile-field textarea:focus {
+  border-color: #777;
+}
+
+/* Messages */
+
+.profile-success {
+  margin: 20px 28px 0;
+  padding: 12px 14px;
+  background: #edf8f1;
+  color: #187a43;
+  border-radius: 7px;
+  font-size: 14px;
+}
+
+.profile-error {
+  margin: 20px 28px 0;
+  padding: 12px 14px;
+  background: #fff1f1;
+  color: #b42323;
+  border-radius: 7px;
+  font-size: 14px;
+}
+
+/* Actions */
+
+.profile-form-actions {
+  display: flex;
+  justify-content: flex-end;
+  padding: 20px 28px;
+}
+
+.profile-save-button {
+  padding: 11px 22px;
+  border: none;
+  border-radius: 7px;
+  background: #111;
+  color: white;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.profile-save-button:hover {
+  background: #333;
+}
+
+.profile-save-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Loading */
+
+.candidate-profile-loading {
+  text-align: center;
+  padding: 100px 20px;
+  color: #777;
+}
+
+/* Responsive */
+
+@media (max-width: 700px) {
+  .candidate-profile-page {
+    padding: 25px 15px 40px;
+  }
+
+  .candidate-profile-header h1 {
+    font-size: 30px;
+  }
+
+  .profile-form-grid {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  .profile-form-section {
+    padding: 20px;
+  }
+
+  .profile-form-actions {
+    padding: 18px 20px;
+  }
+
+  .profile-save-button {
+    width: 100%;
+  }
+}

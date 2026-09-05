@@ -1,0 +1,493 @@
+/* ================================
+   My Applications Page
+================================ */
+
+.applications-page {
+  min-height: calc(100vh - 70px);
+  background: #f8fafc;
+}
+
+/* ================================
+   Hero
+================================ */
+
+.applications-hero {
+  padding: 65px 20px;
+  background: linear-gradient(
+    135deg,
+    #eff6ff 0%,
+    #f8fafc 100%
+  );
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.applications-hero-content {
+  max-width: 1100px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.applications-badge {
+  display: inline-block;
+  padding: 8px 16px;
+  border-radius: 30px;
+  background: #dbeafe;
+  color: #1d4ed8;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  margin-bottom: 15px;
+}
+
+.applications-hero h1 {
+  font-size: 42px;
+  color: #111827;
+  margin-bottom: 12px;
+}
+
+.applications-hero h1 span {
+  color: #2563eb;
+}
+
+.applications-hero p {
+  max-width: 650px;
+  margin: 0 auto;
+  color: #6b7280;
+  font-size: 16px;
+}
+
+/* ================================
+   Main Container
+================================ */
+
+.applications-container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 45px 20px 70px;
+}
+
+/* ================================
+   Header
+================================ */
+
+.applications-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 30px;
+}
+
+.applications-header h2 {
+  color: #111827;
+  font-size: 27px;
+  margin-bottom: 5px;
+}
+
+.applications-header p {
+  color: #6b7280;
+  font-size: 14px;
+}
+
+.browse-jobs-button {
+  border: none;
+  background: #2563eb;
+  color: white;
+  padding: 12px 20px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 700;
+  transition: 0.2s;
+}
+
+.browse-jobs-button:hover {
+  background: #1d4ed8;
+  transform: translateY(-1px);
+}
+
+/* ================================
+   Application List
+================================ */
+
+.applications-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* ================================
+   Application Card
+================================ */
+
+.application-card {
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 16px;
+  padding: 25px;
+  box-shadow: 0 6px 20px rgba(15, 23, 42, 0.06);
+  transition: 0.2s;
+}
+
+.application-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 28px rgba(15, 23, 42, 0.09);
+}
+
+/* ================================
+   Card Top
+================================ */
+
+.application-card-top {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.application-company-icon {
+  width: 58px;
+  height: 58px;
+  flex-shrink: 0;
+  border-radius: 12px;
+  background: #eff6ff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 27px;
+}
+
+.application-title {
+  flex: 1;
+}
+
+.application-title h2 {
+  font-size: 20px;
+  color: #111827;
+  margin-bottom: 4px;
+}
+
+.application-title p {
+  color: #6b7280;
+  font-size: 14px;
+}
+
+/* ================================
+   Status
+================================ */
+
+.application-status {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 7px 13px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.status-applied {
+  background: #eff6ff;
+  color: #2563eb;
+}
+
+.status-review {
+  background: #fff7ed;
+  color: #ea580c;
+}
+
+.status-shortlisted {
+  background: #f0fdf4;
+  color: #16a34a;
+}
+
+.status-interview {
+  background: #f5f3ff;
+  color: #7c3aed;
+}
+
+.status-selected {
+  background: #ecfdf5;
+  color: #047857;
+}
+
+.status-rejected {
+  background: #fef2f2;
+  color: #dc2626;
+}
+
+.status-default {
+  background: #f3f4f6;
+  color: #4b5563;
+}
+
+/* ================================
+   Application Information
+================================ */
+
+.application-info {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  margin-top: 25px;
+  padding: 20px 0;
+  border-top: 1px solid #f0f0f0;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.application-info-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.application-info-item > span {
+  font-size: 20px;
+}
+
+.application-info-item small {
+  display: block;
+  color: #9ca3af;
+  font-size: 11px;
+  margin-bottom: 2px;
+}
+
+.application-info-item strong {
+  display: block;
+  color: #374151;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+/* ================================
+   Cover Letter
+================================ */
+
+.application-cover-letter {
+  margin-top: 20px;
+  padding: 18px;
+  background: #f9fafb;
+  border-radius: 10px;
+}
+
+.application-cover-letter h3 {
+  font-size: 14px;
+  color: #374151;
+  margin-bottom: 8px;
+}
+
+.application-cover-letter p {
+  color: #6b7280;
+  font-size: 14px;
+  line-height: 1.7;
+
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* ================================
+   Card Footer
+================================ */
+
+.application-card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.view-job-button {
+  border: 1px solid #2563eb;
+  background: white;
+  color: #2563eb;
+  padding: 10px 17px;
+  border-radius: 7px;
+  font-size: 13px;
+  font-weight: 700;
+  transition: 0.2s;
+}
+
+.view-job-button:hover {
+  background: #2563eb;
+  color: white;
+}
+
+.application-id {
+  color: #9ca3af;
+  font-size: 12px;
+}
+
+/* ================================
+   Empty State
+================================ */
+
+.applications-empty {
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 16px;
+  padding: 70px 25px;
+  text-align: center;
+  box-shadow: 0 6px 20px rgba(15, 23, 42, 0.05);
+}
+
+.empty-application-icon {
+  width: 75px;
+  height: 75px;
+  margin: 0 auto 20px;
+  border-radius: 50%;
+  background: #eff6ff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 34px;
+}
+
+.applications-empty h2 {
+  color: #111827;
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.applications-empty p {
+  max-width: 500px;
+  margin: 0 auto 25px;
+  color: #6b7280;
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.empty-browse-button {
+  border: none;
+  background: #2563eb;
+  color: white;
+  padding: 12px 22px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 700;
+  transition: 0.2s;
+}
+
+.empty-browse-button:hover {
+  background: #1d4ed8;
+}
+
+/* ================================
+   Loading / Error
+================================ */
+
+.applications-message {
+  min-height: 500px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 30px;
+}
+
+.applications-message p {
+  color: #6b7280;
+  margin-top: 12px;
+}
+
+.applications-message h2 {
+  color: #374151;
+  margin: 10px 0 20px;
+}
+
+.applications-message-icon {
+  font-size: 45px;
+  margin-bottom: 10px;
+}
+
+.retry-button {
+  border: none;
+  background: #2563eb;
+  color: white;
+  padding: 11px 20px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.retry-button:hover {
+  background: #1d4ed8;
+}
+
+/* ================================
+   Responsive
+================================ */
+
+@media (max-width: 800px) {
+  .applications-hero {
+    padding: 50px 20px;
+  }
+
+  .applications-hero h1 {
+    font-size: 35px;
+  }
+
+  .applications-container {
+    padding-top: 35px;
+  }
+
+  .application-info {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+}
+
+@media (max-width: 600px) {
+  .applications-hero h1 {
+    font-size: 30px;
+  }
+
+  .applications-hero p {
+    font-size: 14px;
+  }
+
+  .applications-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .browse-jobs-button {
+    width: 100%;
+  }
+
+  .application-card {
+    padding: 20px;
+  }
+
+  .application-card-top {
+    align-items: flex-start;
+    flex-wrap: wrap;
+  }
+
+  .application-title {
+    min-width: calc(100% - 75px);
+  }
+
+  .application-status {
+    margin-left: 74px;
+  }
+
+  .application-card-footer {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+
+  .view-job-button {
+    width: 100%;
+  }
+
+  .application-id {
+    text-align: center;
+  }
+
+  .applications-empty {
+    padding: 50px 20px;
+  }
+}

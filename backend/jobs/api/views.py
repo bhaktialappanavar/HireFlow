@@ -1,5 +1,5 @@
 from rest_framework import generics, filters
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.response import Response
 from django_filters.rest_framework import DjangoFilterBackend
 
@@ -23,16 +23,14 @@ class JobCreateView(generics.CreateAPIView):
         recruiter_profile = self.request.user.recruiter_profile
 
         serializer.save(
-            recruiter = recruiter_profile
+            recruiter=recruiter_profile,
+            company=recruiter_profile.company
         )
 
 class JobListView(generics.ListAPIView):
     queryset = Job.objects.all()
     serializer_class = JobSerializer
-
-    permission_classes =[
-        IsAuthenticated,
-        ]
+    permission_classes = [AllowAny]
 
     filter_backends = [
         DjangoFilterBackend,
@@ -40,13 +38,16 @@ class JobListView(generics.ListAPIView):
         filters.OrderingFilter,
     ]
 
-    filterset_class = JobFilter
-
     search_fields = [
         "title",
         "description",
-        "location",
         "skills",
+        "location",
+    ]
+
+    filterset_fields = [
+    "location",
+    "job_type",
     ]
 
     ordering_fields = [
@@ -55,9 +56,7 @@ class JobListView(generics.ListAPIView):
         "salary_max",
     ]
 
-    ordering = [
-        "-created_at"
-    ]
+    ordering = ["-created_at"]
 
 class JobDetailView(generics.RetrieveAPIView):
     queryset = Job.objects.all()

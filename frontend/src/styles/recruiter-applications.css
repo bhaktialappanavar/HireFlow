@@ -1,0 +1,677 @@
+/* ========================================
+   Recruiter Applications Page
+======================================== */
+
+.recruiter-applications-page {
+  min-height: calc(100vh - 70px);
+  background: #f8fafc;
+}
+
+/* ========================================
+   Hero
+======================================== */
+
+.recruiter-applications-hero {
+  padding: 65px 20px;
+  background: linear-gradient(
+    135deg,
+    #eff6ff 0%,
+    #f8fafc 100%
+  );
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.recruiter-applications-hero-content {
+  max-width: 1100px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.recruiter-applications-badge {
+  display: inline-block;
+  padding: 8px 16px;
+  border-radius: 30px;
+  background: #dbeafe;
+  color: #1d4ed8;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  margin-bottom: 15px;
+}
+
+.recruiter-applications-hero h1 {
+  font-size: 42px;
+  color: #111827;
+  margin-bottom: 12px;
+}
+
+.recruiter-applications-hero h1 span {
+  color: #2563eb;
+}
+
+.recruiter-applications-hero p {
+  max-width: 650px;
+  margin: 0 auto;
+  color: #6b7280;
+  font-size: 16px;
+}
+
+/* ========================================
+   Container
+======================================== */
+
+.recruiter-applications-container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 45px 20px 70px;
+}
+
+/* ========================================
+   Header
+======================================== */
+
+.recruiter-applications-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 30px;
+}
+
+.recruiter-applications-header h2 {
+  color: #111827;
+  font-size: 27px;
+  margin-bottom: 5px;
+}
+
+.recruiter-applications-header p {
+  color: #6b7280;
+  font-size: 14px;
+}
+
+.refresh-applications-button {
+  border: 1px solid #d1d5db;
+  background: white;
+  color: #374151;
+  padding: 11px 18px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 700;
+  transition: 0.2s;
+}
+
+.refresh-applications-button:hover {
+  border-color: #2563eb;
+  color: #2563eb;
+}
+
+/* ========================================
+   Error
+======================================== */
+
+.recruiter-application-error {
+  padding: 14px 18px;
+  margin-bottom: 20px;
+  border-radius: 9px;
+  background: #fef2f2;
+  color: #dc2626;
+  border: 1px solid #fecaca;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+/* ========================================
+   Application List
+======================================== */
+
+.recruiter-applications-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* ========================================
+   Application Card
+======================================== */
+
+.recruiter-application-card {
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 16px;
+  padding: 25px;
+  box-shadow: 0 6px 20px rgba(15, 23, 42, 0.06);
+  transition: 0.2s;
+}
+
+.recruiter-application-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 28px rgba(15, 23, 42, 0.09);
+}
+
+/* ========================================
+   Candidate Header
+======================================== */
+
+.recruiter-application-top {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.candidate-avatar {
+  width: 58px;
+  height: 58px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: #eff6ff;
+  color: #2563eb;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 19px;
+  font-weight: 800;
+}
+
+.candidate-details {
+  flex: 1;
+}
+
+.candidate-details h2 {
+  color: #111827;
+  font-size: 20px;
+  margin-bottom: 4px;
+}
+
+.candidate-details p {
+  color: #6b7280;
+  font-size: 14px;
+}
+
+/* ========================================
+   Status
+======================================== */
+
+.recruiter-application-status {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 7px 13px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.recruiter-status-applied {
+  background: #eff6ff;
+  color: #2563eb;
+}
+
+.recruiter-status-review {
+  background: #fff7ed;
+  color: #ea580c;
+}
+
+.recruiter-status-shortlisted {
+  background: #f0fdf4;
+  color: #16a34a;
+}
+
+.recruiter-status-interview {
+  background: #f5f3ff;
+  color: #7c3aed;
+}
+
+.recruiter-status-selected {
+  background: #ecfdf5;
+  color: #047857;
+}
+
+.recruiter-status-rejected {
+  background: #fef2f2;
+  color: #dc2626;
+}
+
+.recruiter-status-default {
+  background: #f3f4f6;
+  color: #4b5563;
+}
+
+/* ========================================
+   Information
+======================================== */
+
+.recruiter-application-info {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+  margin-top: 25px;
+  padding: 20px 0;
+  border-top: 1px solid #f0f0f0;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.recruiter-info-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.recruiter-info-item > span {
+  font-size: 19px;
+}
+
+.recruiter-info-item small {
+  display: block;
+  color: #9ca3af;
+  font-size: 11px;
+  margin-bottom: 2px;
+}
+
+.recruiter-info-item strong {
+  display: block;
+  color: #374151;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+/* ========================================
+   Cover Letter
+======================================== */
+
+.recruiter-cover-letter {
+  margin-top: 20px;
+  padding: 18px;
+  background: #f9fafb;
+  border-radius: 10px;
+}
+
+.recruiter-cover-letter h3 {
+  color: #374151;
+  font-size: 14px;
+  margin-bottom: 8px;
+}
+
+.recruiter-cover-letter p {
+  color: #6b7280;
+  font-size: 14px;
+  line-height: 1.7;
+
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* ========================================
+   Footer / Actions
+======================================== */
+
+.recruiter-application-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.view-application-button {
+  border: 1px solid #2563eb;
+  background: white;
+  color: #2563eb;
+  padding: 10px 17px;
+  border-radius: 7px;
+  font-size: 13px;
+  font-weight: 700;
+  transition: 0.2s;
+}
+
+.view-application-button:hover {
+  background: #2563eb;
+  color: white;
+}
+
+.application-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.shortlist-button,
+.reject-button {
+  border: none;
+  padding: 10px 16px;
+  border-radius: 7px;
+  font-size: 13px;
+  font-weight: 700;
+  transition: 0.2s;
+}
+
+.shortlist-button {
+  background: #16a34a;
+  color: white;
+}
+
+.shortlist-button:hover {
+  background: #15803d;
+}
+
+.reject-button {
+  background: #fef2f2;
+  color: #dc2626;
+  border: 1px solid #fecaca;
+}
+
+.reject-button:hover {
+  background: #dc2626;
+  color: white;
+}
+
+.shortlist-button:disabled,
+.reject-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* ========================================
+   Empty State
+======================================== */
+
+.recruiter-applications-empty {
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 16px;
+  padding: 70px 25px;
+  text-align: center;
+  box-shadow: 0 6px 20px rgba(15, 23, 42, 0.05);
+}
+
+.recruiter-empty-icon {
+  width: 75px;
+  height: 75px;
+  margin: 0 auto 20px;
+  border-radius: 50%;
+  background: #eff6ff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 34px;
+}
+
+.recruiter-applications-empty h2 {
+  color: #111827;
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.recruiter-applications-empty p {
+  max-width: 500px;
+  margin: 0 auto;
+  color: #6b7280;
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+/* ========================================
+   Loading
+======================================== */
+
+.recruiter-applications-message {
+  min-height: 500px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.recruiter-applications-message p {
+  color: #6b7280;
+  margin-top: 12px;
+}
+
+/* ========================================
+   Modal Overlay
+======================================== */
+
+.application-modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background: rgba(15, 23, 42, 0.55);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 20px;
+}
+
+/* ========================================
+   Modal
+======================================== */
+
+.application-modal {
+  width: 100%;
+  max-width: 700px;
+  max-height: 90vh;
+  overflow-y: auto;
+
+  background: white;
+  border-radius: 16px;
+  padding: 30px;
+
+  box-shadow: 0 25px 60px rgba(15, 23, 42, 0.25);
+}
+
+/* ========================================
+   Modal Header
+======================================== */
+
+.application-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 20px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.modal-label {
+  color: #2563eb;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.8px;
+}
+
+.application-modal-header h2 {
+  color: #111827;
+  font-size: 25px;
+  margin: 5px 0;
+}
+
+.application-modal-header p {
+  color: #6b7280;
+  font-size: 14px;
+}
+
+.modal-close-button {
+  width: 34px;
+  height: 34px;
+  border: none;
+  border-radius: 50%;
+  background: #f3f4f6;
+  color: #374151;
+  font-size: 24px;
+  line-height: 1;
+}
+
+.modal-close-button:hover {
+  background: #e5e7eb;
+}
+
+/* ========================================
+   Modal Status
+======================================== */
+
+.modal-status-section {
+  padding: 20px 0;
+}
+
+/* ========================================
+   Modal Job Details
+======================================== */
+
+.modal-job-details {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 18px;
+
+  padding: 20px;
+  background: #f9fafb;
+  border-radius: 10px;
+}
+
+.modal-job-details small {
+  display: block;
+  color: #9ca3af;
+  font-size: 11px;
+  margin-bottom: 4px;
+}
+
+.modal-job-details strong {
+  display: block;
+  color: #374151;
+  font-size: 14px;
+}
+
+/* ========================================
+   Modal Cover Letter
+======================================== */
+
+.modal-cover-letter {
+  margin-top: 22px;
+}
+
+.modal-cover-letter h3 {
+  color: #111827;
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+.modal-cover-letter p {
+  color: #4b5563;
+  font-size: 14px;
+  line-height: 1.8;
+  white-space: pre-wrap;
+}
+
+/* ========================================
+   Modal Actions
+======================================== */
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+
+  margin-top: 25px;
+  padding-top: 20px;
+  border-top: 1px solid #e5e7eb;
+}
+
+/* ========================================
+   Responsive
+======================================== */
+
+@media (max-width: 900px) {
+  .recruiter-application-info {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 700px) {
+  .recruiter-applications-hero {
+    padding: 50px 20px;
+  }
+
+  .recruiter-applications-hero h1 {
+    font-size: 34px;
+  }
+
+  .recruiter-applications-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .refresh-applications-button {
+    width: 100%;
+  }
+
+  .recruiter-application-top {
+    flex-wrap: wrap;
+  }
+
+  .candidate-details {
+    min-width: calc(100% - 75px);
+  }
+
+  .recruiter-application-status {
+    margin-left: 74px;
+  }
+
+  .recruiter-application-footer {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .view-application-button {
+    width: 100%;
+  }
+
+  .application-actions {
+    width: 100%;
+  }
+
+  .shortlist-button,
+  .reject-button {
+    flex: 1;
+  }
+}
+
+@media (max-width: 600px) {
+  .recruiter-applications-container {
+    padding: 35px 15px 60px;
+  }
+
+  .recruiter-applications-hero h1 {
+    font-size: 30px;
+  }
+
+  .recruiter-applications-hero p {
+    font-size: 14px;
+  }
+
+  .recruiter-application-card {
+    padding: 20px;
+  }
+
+  .recruiter-application-info {
+    grid-template-columns: 1fr;
+  }
+
+  .application-modal {
+    padding: 22px;
+  }
+
+  .modal-job-details {
+    grid-template-columns: 1fr;
+  }
+
+  .modal-actions {
+    flex-direction: column;
+  }
+
+  .modal-actions button {
+    width: 100%;
+  }
+}

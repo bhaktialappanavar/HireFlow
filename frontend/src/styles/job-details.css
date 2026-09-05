@@ -1,0 +1,318 @@
+/* ================================
+   JOB DETAILS PAGE
+================================ */
+
+.job-details-page {
+  min-height: 100vh;
+  background: #f8fafc;
+  padding: 40px 20px 70px;
+}
+
+.job-details-container {
+  max-width: 1100px;
+  margin: auto;
+}
+
+.back-to-jobs {
+  display: inline-block;
+  margin-bottom: 25px;
+  color: #2563eb;
+  font-weight: 600;
+}
+
+.job-details-header {
+  background: white;
+  padding: 35px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  gap: 25px;
+  border: 1px solid #e5e7eb;
+  margin-bottom: 25px;
+}
+
+.job-details-company-icon {
+  width: 75px;
+  height: 75px;
+  border-radius: 12px;
+  background: #eff6ff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 35px;
+}
+
+.job-details-title {
+  flex: 1;
+}
+
+.job-details-type {
+  display: inline-block;
+  background: #eff6ff;
+  color: #2563eb;
+  padding: 5px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.job-details-title h1 {
+  font-size: 32px;
+  color: #111827;
+  margin-bottom: 8px;
+}
+
+.company-name {
+  color: #6b7280;
+  font-size: 16px;
+}
+
+
+/* ================================
+   DETAILS LAYOUT
+================================ */
+
+.job-details-layout {
+  display: grid;
+  grid-template-columns: 1fr 330px;
+  gap: 25px;
+}
+
+.job-details-main {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+.job-overview {
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 14px;
+  padding: 25px;
+
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 25px;
+}
+
+.overview-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.overview-icon {
+  font-size: 22px;
+}
+
+.overview-item small {
+  display: block;
+  color: #6b7280;
+  font-size: 12px;
+  margin-bottom: 3px;
+}
+
+.overview-item strong {
+  display: block;
+  color: #111827;
+  font-size: 15px;
+}
+
+
+/* ================================
+   DESCRIPTION & SKILLS
+================================ */
+
+.details-section {
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 14px;
+  padding: 30px;
+}
+
+.details-section h2 {
+  color: #111827;
+  font-size: 21px;
+  margin-bottom: 15px;
+}
+
+.job-description {
+  color: #4b5563;
+  line-height: 1.8;
+  white-space: pre-line;
+}
+
+.details-skills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.details-skills span {
+  background: #eff6ff;
+  color: #2563eb;
+  padding: 7px 13px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+
+/* ================================
+   SIDEBAR
+================================ */
+
+.job-details-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.apply-card,
+.job-meta-card {
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 14px;
+  padding: 25px;
+}
+
+.apply-card h2 {
+  color: #111827;
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.apply-card p {
+  color: #6b7280;
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+
+.apply-button {
+  width: 100%;
+  border: none;
+  background: #2563eb;
+  color: white;
+  padding: 13px 20px;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.apply-button:hover {
+  background: #1d4ed8;
+}
+
+.disabled-button {
+  background: #9ca3af;
+  cursor: not-allowed;
+}
+
+.disabled-button:hover {
+  background: #9ca3af;
+}
+
+.sidebar-back-link {
+  display: block;
+  text-align: center;
+  margin-top: 15px;
+  color: #2563eb;
+  font-size: 14px;
+}
+
+.job-meta-card h3 {
+  color: #111827;
+  margin-bottom: 15px;
+  font-size: 18px;
+}
+
+.meta-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+  padding: 12px 0;
+  border-bottom: 1px solid #f3f4f6;
+  font-size: 14px;
+}
+
+.meta-row:last-child {
+  border-bottom: none;
+}
+
+.meta-row span {
+  color: #6b7280;
+}
+
+.meta-row strong {
+  color: #111827;
+  text-align: right;
+}
+
+.status-open {
+  color: #16a34a !important;
+}
+
+.status-closed {
+  color: #dc2626 !important;
+}
+
+
+/* ================================
+   LOADING / ERROR
+================================ */
+
+.details-message {
+  min-height: 60vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 30px;
+}
+
+.details-message p {
+  margin-top: 15px;
+  color: #6b7280;
+}
+
+
+/* ================================
+   RESPONSIVE
+================================ */
+
+@media (max-width: 800px) {
+  .job-details-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .job-details-sidebar {
+    order: -1;
+  }
+}
+
+@media (max-width: 600px) {
+  .job-details-page {
+    padding: 25px 15px 50px;
+  }
+
+  .job-details-header {
+    padding: 25px;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .job-details-title h1 {
+    font-size: 26px;
+  }
+
+  .job-overview {
+    grid-template-columns: 1fr;
+    padding: 20px;
+  }
+
+  .details-section {
+    padding: 22px;
+  }
+}

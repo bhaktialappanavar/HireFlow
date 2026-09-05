@@ -84,7 +84,7 @@ class Job(models.Model):
         return self.title
 
 class Application(models.Model):
-    class status(models.TextChoices):
+    class Status(models.TextChoices):
         APPLIED = "APPLIED", "Applied"
         UNDER_REVIEW = "UNDER_REVIEW","Under Review"
         SHORTLISTED = "SHORTLISTED","Shortlisted"
@@ -110,8 +110,8 @@ class Application(models.Model):
 
     status = models.CharField(
         max_length=20,
-        choices=status.choices,
-        default=status.APPLIED
+        choices=Status.choices,
+        default=Status.APPLIED
     )
 
     applied_at = models.DateTimeField(

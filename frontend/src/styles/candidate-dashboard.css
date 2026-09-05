@@ -1,0 +1,263 @@
+/* Candidate Dashboard */
+
+.candidate-dashboard {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 24px 60px;
+}
+
+/* Header */
+
+.candidate-dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 30px;
+  margin-bottom: 28px;
+}
+
+.candidate-badge {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  color: #777;
+}
+
+.candidate-dashboard-header h1 {
+  margin: 10px 0 8px;
+  font-size: 38px;
+  line-height: 1.2;
+}
+
+.candidate-dashboard-header p {
+  margin: 0;
+  color: #777;
+  font-size: 15px;
+}
+
+.candidate-browse-button {
+  padding: 12px 20px;
+  background: #111;
+  color: white;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.candidate-browse-button:hover {
+  background: #333;
+}
+
+/* Profile */
+
+.candidate-profile-card {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding: 22px;
+  margin-bottom: 35px;
+  background: #f8f8f8;
+  border: 1px solid #e8e8e8;
+  border-radius: 12px;
+}
+
+.candidate-profile-avatar {
+  width: 58px;
+  height: 58px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: #111;
+  color: white;
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.candidate-profile-info h2 {
+  margin: 0 0 4px;
+  font-size: 20px;
+}
+
+.candidate-profile-info p {
+  margin: 0 0 6px;
+  color: #777;
+  font-size: 14px;
+}
+
+.candidate-profile-info span {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: #555;
+}
+
+/* Section Heading */
+
+.section-heading {
+  margin-bottom: 18px;
+}
+
+.section-heading span {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  color: #888;
+}
+
+.section-heading h2 {
+  margin: 6px 0 0;
+  font-size: 24px;
+}
+
+/* Stats */
+
+.candidate-stats-section {
+  margin-bottom: 40px;
+}
+
+.candidate-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 15px;
+}
+
+.candidate-stat-card {
+  padding: 20px;
+  background: white;
+  border: 1px solid #e5e5e5;
+  border-radius: 10px;
+}
+
+.stat-label {
+  display: block;
+  margin-bottom: 14px;
+  color: #777;
+  font-size: 12px;
+}
+
+.candidate-stat-card strong {
+  display: block;
+  font-size: 30px;
+  margin-bottom: 5px;
+}
+
+.candidate-stat-card p {
+  margin: 0;
+  color: #888;
+  font-size: 12px;
+}
+
+/* Quick Actions */
+
+.candidate-actions-section {
+  margin-top: 10px;
+}
+
+.candidate-action-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 18px;
+}
+
+.candidate-action-card {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 22px;
+  border: 1px solid #e5e5e5;
+  border-radius: 12px;
+  text-decoration: none;
+  color: #111;
+  background: white;
+  transition: 0.2s ease;
+}
+
+.candidate-action-card:hover {
+  border-color: #bbb;
+  transform: translateY(-2px);
+}
+
+.action-icon {
+  width: 42px;
+  height: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f3f3f3;
+  border-radius: 8px;
+  font-size: 20px;
+  flex-shrink: 0;
+}
+
+.candidate-action-card h3 {
+  margin: 0 0 5px;
+  font-size: 17px;
+}
+
+.candidate-action-card p {
+  margin: 0;
+  color: #777;
+  font-size: 13px;
+}
+
+.action-arrow {
+  margin-left: auto;
+  font-size: 20px;
+  color: #777;
+}
+
+/* Loading */
+
+.candidate-dashboard-loading {
+  text-align: center;
+  padding: 100px 20px;
+  color: #777;
+}
+
+/* Responsive */
+
+@media (max-width: 1000px) {
+  .candidate-stats-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 700px) {
+  .candidate-dashboard {
+    padding: 25px 15px 40px;
+  }
+
+  .candidate-dashboard-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .candidate-dashboard-header h1 {
+    font-size: 30px;
+  }
+
+  .candidate-browse-button {
+    width: 100%;
+    text-align: center;
+  }
+
+  .candidate-stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .candidate-action-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 450px) {
+  .candidate-stats-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .candidate-profile-card {
+    align-items: flex-start;
+  }
+}
